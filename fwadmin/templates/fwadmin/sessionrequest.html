@@ -1,0 +1,85 @@
+{% extends "generic/object.html" %}
+{% load render_table from django_tables2 %}
+{% load custom_links %}
+{% load perms %}
+{% load buttons %}
+{% load plugins %}
+{% load fwadmin_buttons %}
+{% comment %}
+__author__ = "Andrea Dainese"
+__contact__ = "andrea@adainese.it"
+__copyright__ = "Copyright 2022, Andrea Dainese"
+__license__ = "GPLv3"
+{% endcomment %}
+{% block title %}Request #{{ object.id }}{% endblock title %}
+{% block controls %}
+    {# Disable Edit/Delete Buttons #}
+    <div class="controls">
+        <div class="control-group">
+            {% plugin_buttons object %}
+            {# Extra buttons #}
+            {% block extra_controls %}
+                {% if request.user|can_change:object %}
+                    {% approve_button object %}
+                    {% reject_button object %}
+                {% elif request.user|can_view:object %}
+                    {% self_approve_button object %}
+                {% endif %}
+            {% endblock extra_controls %}
+            {% if request.user|can_add:object %}
+                {% clone_button object %}
+            {% endif %}
+        </div>
+        <div class="control-group">{% custom_links object %}</div>
+    </div>
+{% endblock controls %}
+{% block content %}
+    <div class="row mb-3">
+        <div class="col col-md-6">
+            <div class="card">
+                <h5 class="card-header">Session request</h5>
+                <div class="card-body">
+                    <table class="table table-hover attr-table">
+                        <tr>
+                            <th scope="row">Requested by</th>
+                            <td>{{ object.requested_by }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Reason</th>
+                            <td>{{ object.request_reason }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Status</th>
+                            <td>{{ object.status }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Start at</th>
+                            <td>{{ object.start_at }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">End at</th>
+                            <td>{{ object.end_at }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Cleared</th>
+                            <td>{{ object.cleared }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            {% include "inc/panels/custom_fields.html" %}
+        </div>
+        <div class="col col-md-6">
+            {% include "inc/panels/tags.html" %}
+            {% include "inc/panels/comments.html" %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-md-12">
+            <div class="card">
+                <h5 class="card-header">Dynamic lists</h5>
+                <div class="card-body table-responsive">{% render_table dynamiclist_table %}</div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% load form_helpers %}
+{% comment %}
+__author__ = "Andrea Dainese"
+__contact__ = "andrea@adainese.it"
+__copyright__ = "Copyright 2022, Andrea Dainese"
+__license__ = "GPLv3"
+{% endcomment %}
+<form action="{{ form_url }}" method="post">
+    {% csrf_token %}
+    <div class="modal-header">
+        <h5 class="modal-title">Confirm {{ action }}</h5>
+    </div>
+    <div class="modal-body">
+        <p>
+            Are you sure you want to <strong class="text-{% if action == 'approve' or action == 'self_approve' %}success{% else %}danger{% endif %}">{{ action }}</strong> {{ object_type }} <strong>{{ object }}</strong>?
+        </p>
+        {% render_form form %}
+    </div>
+    <input type="hidden" name="action" value="{{ action }}" />
+    <div class="modal-footer">
+        {% if return_url %}
+            <a href="{{ return_url }}" class="btn btn-outline-secondary">Cancel</a>
+        {% else %}
+            <button type="button"
+                    class="btn btn-outline-secondary"
+                    data-bs-dismiss="modal">Cancel</button>
+        {% endif %}
+        <button type="submit" class="btn btn-{% if action == 'approve' or action == 'self_approve' %}success{% else %}danger{% endif %}">{{ action|title }}</button>
+    </div>
+</form>

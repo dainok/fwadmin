@@ -1,0 +1,16 @@
+{% comment %}
+__author__ = "Andrea Dainese"
+__contact__ = "andrea@adainese.it"
+__copyright__ = "Copyright 2022, Andrea Dainese"
+__license__ = "GPLv3"
+
+Used in templatetags/fwadmin_buttons.py
+{% endcomment %}
+<a href="#"
+   hx-get="{{ url }}?action=self_approve"
+   hx-target="#htmx-modal-content"
+   class="btn btn-sm btn-success"
+   data-bs-toggle="modal"
+   data-bs-target="#htmx-modal">
+    Self approve
+</a>

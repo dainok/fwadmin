@@ -1,0 +1,49 @@
+{% extends "generic/object_list.html" %}
+{% load buttons %}
+{% comment %}
+__author__ = "Andrea Dainese"
+__contact__ = "andrea@adainese.it"
+__copyright__ = "Copyright 2022, Andrea Dainese"
+__license__ = "GPLv3"
+{% endcomment %}
+{% comment %}
+Add manage buttons to the generic template.
+{% endcomment %}
+{% block bulk_buttons %}
+    {% if perms.fwadmin.change_sessionrequest %}
+        {% if "bulk_approve" in actions %}
+            <button type="submit"
+                    name="action"
+                    value="approve"
+                    formaction="{% url "plugins:fwadmin:sessionrequest_bulk_manage" %}?return_url={% url "plugins:fwadmin:sessionrequest_list" %}"
+                    class="btn btn-success btn-sm">
+                Approve Selected
+            </button>
+        {% endif %}
+        {% if "bulk_reject" in actions %}
+            <button type="submit"
+                    name="action"
+                    value="reject"
+                    formaction="{% url "plugins:fwadmin:sessionrequest_bulk_manage" %}?return_url={% url "plugins:fwadmin:sessionrequest_list" %}"
+                    class="btn btn-danger btn-sm">
+                Reject Selected
+            </button>
+        {% endif %}
+    {% elif perms.fwadmin.add_sessionrequest %}
+        {% if "bulk_selfapprove" in actions %}
+            <button type="submit"
+                    name="action"
+                    value="self_approve"
+                    formaction="{% url "plugins:fwadmin:sessionrequest_bulk_manage" %}?return_url={% url "plugins:fwadmin:sessionrequest_list" %}"
+                    class="btn btn-success btn-sm">
+                Self-Approve Selected
+            </button>
+        {% endif %}
+    {% endif %}
+    {% if "bulk_edit" in actions %}
+        {% bulk_edit_button model query_params=request.GET %}
+    {% endif %}
+    {% if "bulk_delete" in actions %}
+        {% bulk_delete_button model query_params=request.GET %}
+    {% endif %}
+{% endblock bulk_buttons %}

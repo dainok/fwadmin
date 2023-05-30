@@ -1,0 +1,7 @@
+recursive-include fwadmin/static *
+recursive-include fwadmin/templates *
+recursive-include fwadmin/templatetags *
+recursive-include fwadmin/api *
+recursive-include fwadmin/scripts *
+recursive-include fwadmin/reports *
+prune fwadmin/api/__pycache__
