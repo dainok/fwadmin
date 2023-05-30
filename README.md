@@ -6,8 +6,8 @@ FWAdmin implements External Dynamic Lists (EDL), which are dynamically populated
 
 ## Table of contents
 
-1. [Introduction](/dainok/fwadmin/wiki "Introduction")
-1. [Firewall configuration](/dainok/fwadmin/wiki/Firewall-configuration "Firewall configuration")
-1. [NetBox with FWAdmin installation](/dainok/fwadmin/wiki/NetBox-with-FWAdmin-installation "NetBox with FWAdmin installation")
-1. [Utilizing FWAdmin](/dainok/fwadmin/wiki/Utilizing-FWAdmin "Utilizing FWAdmin")
-1. [Developing FWAdmin](/dainok/fwadmin/wiki/Developing-FWAdmin "Developing FWAdmin")
+1. [Introduction](https://github.com/dainok/fwadmin/wiki "Introduction")
+1. [Firewall configuration](https://github.com/dainok/fwadmin/wiki/Firewall-configuration "Firewall configuration")
+1. [NetBox with FWAdmin installation](https://github.com/dainok/fwadmin/wiki/NetBox-with-FWAdmin-installation "NetBox with FWAdmin installation")
+1. [Utilizing FWAdmin](https://github.com/dainok/fwadmin/wiki/Utilizing-FWAdmin "Utilizing FWAdmin")
+1. [Developing FWAdmin](https://github.com/dainok/fwadmin/wiki/Developing-FWAdmin "Developing FWAdmin")
