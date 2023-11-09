@@ -130,3 +130,17 @@ dmypy.json
 
 # Linux
 nohup.out
+*.swp
+
+# MacOS
+.DS_Store
+
+# Reports
+*.csv
+
+# Archives
+.tar.gz
+.zip
+
+# Don't ignore
+!docker/*

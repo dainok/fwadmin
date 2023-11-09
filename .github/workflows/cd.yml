@@ -1,4 +1,3 @@
----
 # Set on GitHub -> Settings -> Secrets and variables -> Actions -> Secrets:
 #   - PYPI_USERNAME: PyPI username
 #   - PYPI_PASSWORD: PyPI password
@@ -6,17 +5,18 @@
 #   - Read and write permissions
 # Set on GitHub -> Settings -> Environments:
 #   - add users who can review/approve on environment "release"
+# Set PYTHON_VERSION below to a specific Python version.
 name: "CD"
+env:
+  PYTHON_VERSION: v3.10
 concurrency:
   # Cancel any existing runs of this workflow for this same PR
   group: "${{ github.workflow }}-${{ github.ref }}"
   cancel-in-progress: true
-on:
+on:  # yamllint disable-line rule:truthy
   pull_request:
-    types: [ closed ]
-
+    types: [closed]
 jobs:
-
   release:
     # Run only if the PR has been merged
     if: github.event.pull_request.merged == true
@@ -25,6 +25,8 @@ jobs:
     steps:
       - name: "Setup Python3"
         uses: actions/setup-python@v3
+        with:
+          python-version: "${{ env.PYTHON_VERSION }}"
       - name: "Install Twine"
         run: pip install twine
       - name: "Check out repository code"
@@ -35,10 +37,11 @@ jobs:
       - run: ls
       - name: "Bump tag"
         id: tag
-        uses: anothrNick/github-tag-action@1.64.0
+        uses: anothrNick/github-tag-action@1.66.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INITIAL_VERSION: 0.0.2
+          RELEASE_BRANCHES: master
           DEFAULT_BUMP: patch
           VERBOSE: false
           BRANCH_HISTORY: last
